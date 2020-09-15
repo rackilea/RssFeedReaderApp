@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "hr.asseco.android.rssfeedreaderapp"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def room_version = "2.2.5"
+    def dagger_version = "2.20"
+    def rx_android_version = '2.1.0'
+    def multidex_version = "2.0.1"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation group: 'javax.xml.stream', name: 'stax-api', version: '1.0-2'
+
+    implementation project(':data')
+    implementation project(':device')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+    implementation "androidx.multidex:multidex:$multidex_version"
+
+    implementation 'com.google.android.material:material:1.2.0'
+    implementation "com.google.dagger:dagger:$dagger_version"
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.10.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.0"
+
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}
